@@ -1,7 +1,7 @@
 module App exposing (main)
 
-import Html exposing (Html, div, button, text, input)
-import Html.Attributes exposing (id, class, value)
+import Html exposing (Html, div, button, text, input, label, p)
+import Html.Attributes exposing (id, class, value, for)
 import Html.Events exposing (onClick, onInput)
 
 
@@ -54,10 +54,16 @@ update msg model =
 rootView : Model -> Html Msg
 rootView model =
     div [ id "app-root" ]
-        [ text ("Counter is... " ++ (toString model.counter))
-        , input [ onInput UpdateAmount, value (toString model.amount) ] []
-        , button [ onClick (Increment model.amount) ] [ text "Increment" ]
-        , button [ onClick (Decrement model.amount) ] [ text "Decrement" ]
+        [ p []
+            [ text ("Counter is... " ++ (toString model.counter)) ]
+        , p []
+            [ label [ for "amount" ] [ text "Amount " ]
+            , input [ onInput UpdateAmount, value (toString model.amount), id "amount" ] []
+            ]
+        , p []
+            [ button [ onClick (Increment model.amount) ] [ text "Increment" ]
+            , button [ onClick (Decrement model.amount) ] [ text "Decrement" ]
+            ]
         ]
 
 
