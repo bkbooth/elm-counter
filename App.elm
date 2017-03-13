@@ -15,9 +15,11 @@ main =
         }
 
 
+
 -- UPDATE
 
-update : Msg -> Model -> (Model, Cmd Msg)
+
+update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         Increment amount ->
@@ -32,19 +34,22 @@ update msg model =
 
         UpdateAmount newAmount ->
             let
-                parsed = String.toInt newAmount
+                parsed =
+                    String.toInt newAmount
             in
                 case parsed of
                     Ok value ->
-                        ( { model | amount = value}
+                        ( { model | amount = value }
                         , Cmd.none
                         )
 
                     Err _ ->
-                        (model, Cmd.none)
+                        ( model, Cmd.none )
+
 
 
 -- VIEW
+
 
 rootView : Model -> Html Msg
 rootView model =
@@ -56,15 +61,17 @@ rootView model =
         ]
 
 
+
 -- MODEL
 
+
 type alias Model =
-    { counter: Int
-    , amount: Int
+    { counter : Int
+    , amount : Int
     }
 
 
-initialModel : (Model, Cmd Msg)
+initialModel : ( Model, Cmd Msg )
 initialModel =
     ( Model 0 1
     , Cmd.none
@@ -77,7 +84,9 @@ type Msg
     | UpdateAmount String
 
 
+
 -- SUBSCRIPTIONS
+
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
